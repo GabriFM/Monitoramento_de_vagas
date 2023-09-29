@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block form_vaga %}
+{% block body %}
+ <div class ='container' style="text-align: center">
+     <h1>Verificação de vagas de estacionamento</h1>
+ </div>
+
+        <div class ="container">
+              <hr>
+              <div class="row" >
+                <div class="col">
+                    <form method="POST" action=""class="border p-4 mt-2" enctype="multipart/form-data">
+                        {{ form_vaga.csrf_token }}
+                        <legend>Verificar Disponibilidade de Vaga</legend>
+                        <fieldset>
+                            <div class ="form-group">
+                                {{ form_vaga.username.label(class="form-control-label") }}
+                                {% if form_vaga.username.errors %}
+                                    {{ form_vaga.username(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_vaga.username.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_vaga.username(class="form-control") }}
+                                {% endif %}
+                            </div>
+                            <div class ="form-group">
+                                {{ form_vaga.email.label(class="form-control-label") }}
+                                {% if form_vaga.email.errors %}
+                                    {{ form_vaga.email(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_vaga.email.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_vaga.email(class="form-control") }}
+                                {% endif %}
+                            </div>
+                            <div class ="form-group">
+                                {{ form_vaga.placa.label(class="form-control-label") }}
+                                {% if form_vaga.placa.errors %}
+                                    {{ form_vaga.placa(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_vaga.placa.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_vaga.placa(class="form-control") }}
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <p>Tipos de Vaga</p>
+                            {% for campo in form_vaga %}
+                                {% if 'vaga_' in campo.name %}
+                                     <div class ="form-group">
+                                         {{ campo(class="form-check-input") }}
+
+                                         {{ campo.label(class="form-check-label") }}
+                                     </div>
+                                {% endif %}
+                            {% endfor %}
+                        </fieldset>
+                        {{ form_vaga.botao_submit_home(class="btn btn-primary mt-2") }}
+                    </form>
+              </div>
+          </div>
+        </div>
+
+{% endblock %}
+{% endblock %}
